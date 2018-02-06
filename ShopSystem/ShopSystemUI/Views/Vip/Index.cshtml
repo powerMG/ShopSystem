@@ -1,0 +1,160 @@
+﻿@using ShopSystemEntity
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<VipScore> vipLs = Model as List<VipScore>;
+}
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>
+                    库存信息<small>这里是备注信息</small>
+                </h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="#">Settings 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Settings 2</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="btn-group">
+                    <button class="btn btn-sm btn-primary" type="button" data-original-title="刷新" id="btnRefresh"><i class="fa fa-refresh"></i> 刷新</button>
+                    <button class="btn btn-sm btn-default" type="button" data-placement="top" data-toggle="tooltip" data-original-title="编辑" id="btnEdit"><i class="fa fa-cog"></i></button>
+                    <button class="btn btn-sm btn-default" type="button" data-placement="top" data-toggle="tooltip" data-original-title="添加" id="btnAdd"><i class="fa fa-print"></i></button>
+                    <button class="btn btn-sm btn-default" type="button" data-placement="top" data-toggle="tooltip" data-original-title="删除" id="btnDel"><i class="fa fa-trash-o"></i></button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped jambo_table bulk_action" id="example">
+                        <thead>
+                            <tr class="headings">
+                                <th>
+                                    <input type="checkbox" id="check-all" class="flat" style="position: absolute; opacity: 0;">
+                                </th>
+                                <th class="column-title">卡号</th>
+                                <th class="column-title">会员积分 </th>
+                                <th class="column-title">会员名称 </th>
+                                <th class="column-title">会员联系方式 </th>
+                                <th class="column-title">性别 </th>
+                                <th class="column-title no-link last">
+                                    <span class="nobr">说明</span>
+                                </th>
+                                <th class="bulk-actions" colspan="7">
+                                    <a class="antoo" style="color: #fff; font-weight: 500;">批量操作 ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (vipLs != null)
+                            {
+                                foreach (VipScore vipScoreItem in vipLs)
+                                {
+                                    <tr class="even pointer">
+                                        <td class="a-center ">
+                                            <input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;" data="@vipScoreItem.Id">
+                                        </td>
+                                        <td class="line_30">@vipScoreItem.CardNumber </td>
+                                        <td class="line_30">@vipScoreItem.Score </td>
+                                        <td class="line_30">@vipScoreItem.VipName</td>
+                                        <td class="line_30">@vipScoreItem.VipPhone</td>
+                                        <td class="line_30">@vipScoreItem.VipSex</td>
+                                        <td class=" last">
+                                            <a href="#">@vipScoreItem.VipRemark</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section js{
+    <script>
+        $(function() {
+            //刷新列表页
+            $("#btnRefresh").click(function() {
+                window.location.reload();
+            });
+            //编辑库存信息
+            $("#btnEdit").click(function() {
+                var objcheck = $(".bulk_action input[name='table_records']:checked");
+                if (objcheck.length == 1) {
+                    var stockId = $(objcheck).attr("data");
+                    window.location.href = "@Url.Action("AddStock", "Stock")?stockId=" + stockId;
+                } else if (objcheck.length > 1) {
+                    {
+                        layer.alert("最多只能选择一条信息进行编辑", {
+                            icon: 2,
+                            skin: 'layer-ext-moon',
+                        });
+                    }
+                } else {
+                    layer.alert("请选择一条信息进行编辑", {
+                        icon: 2,
+                        skin: 'layer-ext-moon'
+                    });
+                }
+            });
+            //添加库存数据
+            $("#btnAdd").click(function() {
+                window.location.href = "@Url.Action("AddVipData", "Vip")";
+            });
+            //删除库存信息
+            $("#btnDel").click(function() {
+                var objcheck = $(".bulk_action input[name='table_records']:checked");
+                var delid = "";
+                $.each(objcheck, function(i, item) {
+                    if (delid != "") {
+                        delid += "|";
+                    }
+                    delid += $(this).attr("data");
+                });
+                if (delid != "") {
+                    layer.alert("您确定要删除该库存记录么?", {
+                        icon: 3,
+                        skin: 'layer-ext-moon',
+                        btn: ['确定', '取消']
+                    }, function() {
+                        $.post("@Url.Action("DelStockData", "Stock")", { "delId": delid }, function(result) {
+                            if (result.success) {
+                                layer.alert(result.error.message, {
+                                    icon: 1,
+                                    skin: 'layer-ext-moon',
+                                    btn: ['确定']
+                                }, function() {
+                                    window.location.reload();
+                                });
+                            } else {
+                                layer.alert(result.error.message, {
+                                    icon: 2,
+                                    skin: 'layer-ext-moon',
+                                });
+                            }
+                        });
+                    }, function() {
+                        return false;
+                    });
+                }
+            });
+        });
+    </script>
+}

@@ -1,0 +1,7 @@
+G:\WebsetDemo\ShopManagerSystem\ShopSystem\ShopSystemDAL\bin\Debug\ShopSystemDAL.dll
+G:\WebsetDemo\ShopManagerSystem\ShopSystem\ShopSystemDAL\bin\Debug\ShopSystemDAL.pdb
+G:\WebsetDemo\ShopManagerSystem\ShopSystem\ShopSystemDAL\bin\Debug\ShopSystemEntity.dll
+G:\WebsetDemo\ShopManagerSystem\ShopSystem\ShopSystemDAL\bin\Debug\ShopSystemEntity.pdb
+G:\WebsetDemo\ShopManagerSystem\ShopSystem\ShopSystemDAL\obj\Debug\ShopSystemDAL.csprojResolveAssemblyReference.cache
+G:\WebsetDemo\ShopManagerSystem\ShopSystem\ShopSystemDAL\obj\Debug\ShopSystemDAL.dll
+G:\WebsetDemo\ShopManagerSystem\ShopSystem\ShopSystemDAL\obj\Debug\ShopSystemDAL.pdb

@@ -1,0 +1,477 @@
+﻿@using ShopSystemEntity
+@{
+    ViewBag.Title = "AddStock";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    StockInfo stockEntity = Model as StockInfo;
+}
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>
+                    @ViewBag.ShowTitle <small>这里是备注信息</small>
+                </h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="#">Settings 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Settings 2</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            @if (stockEntity != null)
+            {
+                <form id="addform" method="POST" class="form-horizontal form-label-left">
+                    <div class="x_content">
+                        <br>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ShopImg">
+                                商品图片 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @*<div class="fa-border w_55 fixed_height_200" id="stockImg">
+                                    </div>*@
+                                <div id="uploader-demo">
+                                    <!--用来存放item-->
+                                    <div id="fileList" class="uploader-list" style="width: 152px;"></div>
+                                    <div id="filePicker">
+                                        @*class="btn btn-primary"*@
+                                        选择图片
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ShopName">
+                                商品名称 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="ShopName" name="ShopName" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5" value="@stockEntity.ShopName">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ShopNum">
+                                商品总数量 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="ShopNum" name="ShopNum" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="7" value="@stockEntity.ShopNum">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ShopSource">
+                                商品来源
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="ShopSource" name="ShopSource" class="form-control col-md-7 col-xs-12" data-parsley-id="7" value="@stockEntity.ShopSource">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ShopPurchasePrice">
+                                商品进价 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="ShopPurchasePrice" name="ShopPurchasePrice" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="7" value="@stockEntity.ShopPurchasePrice">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ShopPrice">
+                                商品售价 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="ShopPrice" name="ShopPrice" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="7" value="@stockEntity.ShopPrice">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                备注
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea class="form-control" id="ShopRemark" name="ShopRemark" rows="3" placeholder="请填写备注信息">@stockEntity.ShopRemark</textarea>
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <input type="hidden" id="ShopImg" name="ShopImg" />
+                        <input type="hidden" id="ShopImgName" name="ShopImgName" />
+                        <input type="hidden" id="Id" name="Id" value="@stockEntity.Id" />
+                    </div>
+                    <div class="x_title">
+                        <h2>
+                            库存参数配置信息
+                        </h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                @if (stockEntity.StockInfoItemList == null)
+                                {
+                                    <button type="button" class="btn btn-danger" id="appendStockItem" dataindex="0">添加参数信息</button>
+                                }
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content" id="stockInfoItemLs">
+                        <br>
+                        @if (stockEntity.StockInfoItemList != null && stockEntity.StockInfoItemList.Any())
+                        {
+                            for (var i = 0; i < stockEntity.StockInfoItemList.Count; i++)
+                            {
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="StockInfoItemList_ShopNumber">
+                                        商品编号 <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" id="StockInfoItemList_ShopNumber" name="StockInfoItemList[@i].ShopNumber" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5" value="@stockEntity.StockInfoItemList[i].ShopNumber">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="StockInfoItemList_Size">
+                                        尺码 <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" id="StockInfoItemList_Size" name="StockInfoItemList[@i].Size" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5" value="@stockEntity.StockInfoItemList[i].Size">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="StockInfoItemList_Color">
+                                        颜色 <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" id="StockInfoItemList_Color" name="StockInfoItemList[@i].Color" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5" value="@stockEntity.StockInfoItemList[i].Color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="StockInfoItemList_Number">
+                                        数量 <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" id="StockInfoItemList_Number" name="StockInfoItemList[@i].Number" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5" value="@stockEntity.StockInfoItemList[i].Number">
+                                    </div>
+                                </div>
+                                <div class="ln_solid"></div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="StockInfoItemList_ShopNumber">
+                                    商品编号 <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="StockInfoItemList_ShopNumber" name="StockInfoItemList[0].ShopNumber" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5" value="@stockEntity.ShopName">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="StockInfoItemList_Size">
+                                    尺码 <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="StockInfoItemList_Size" name="StockInfoItemList[0].Size" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5" value="@stockEntity.ShopName">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="StockInfoItemList_Color">
+                                    颜色 <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="StockInfoItemList_Color" name="StockInfoItemList[0].Color" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5" value="@stockEntity.ShopName">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="StockInfoItemList_Number">
+                                    数量 <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="StockInfoItemList_Number" name="StockInfoItemList[0].Number" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5" value="@stockEntity.ShopName">
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                    <div class="x_content">
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <button type="reset" id="btnCancel" class="btn btn-primary">重置</button>
+                                <button type="button" id="btnSaveFrom" class="btn btn-success">提交</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            }
+        </div>
+    </div>
+</div>
+@section js{
+    <link href="~/Script/webuploader-0.1.5/webuploader.css" rel="stylesheet" />
+    <script src="~/Script/webuploader-0.1.5/webuploader.js"></script>
+    <script>
+        var stckItemHtml = "";
+
+        function SaveFrom(formdate) {
+            //提交表单数据
+            var options = {
+                url: '@Url.Action("AddStockData", "Stock")',
+                type: 'post',
+                dataType: 'json',
+                data: formdate,
+                success: function (data) {
+                    if (data.success) {
+                        layer.alert(data.error.message, {
+                            icon: 1,
+                            skin: 'layer-ext-moon',
+                            btn: ['确定']
+                        }, function () {
+                            window.location.reload();
+                        });
+                    } else {
+                        layer.alert(data.error.message, {
+                            icon: 2,
+                            skin: 'layer-ext-moon'
+                        });
+                    }
+                }
+            };
+            $.ajax(options);
+        }
+
+        // 初始化Web Uploader
+        var uploader = WebUploader.create({
+            // 选完文件后，是否自动上传。
+            auto: false,
+            // swf文件路径
+            swf: '/Script/webuploader-0.1.5/Uploader.swf',
+            // 文件接收服务端。
+            server: '@Url.Action("UpLoadeImg", "Stock")',
+            // 选择文件的按钮。可选。
+            // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+            pick: '#filePicker',
+            // 只允许选择图片文件。
+            accept: {
+                title: 'Images',
+                extensions: 'gif,jpg,jpeg,bmp,png',
+                mimeTypes: 'image/*'
+            }
+        });
+        $list = $("#fileList");
+        $btnUpMenu = $("#filePicker");
+        // 当有文件添加进来的时候
+        uploader.on('fileQueued', function (file) {
+            //隐藏上传按钮
+            $btnUpMenu.hide();
+            //绑定上传预览效果
+            var $li = $(
+                    '<div id="' + file.id + '" class="file-item thumbnail">' +
+                    '<img>' +
+                    '<div style="clear:both;"></div>' +
+                    '<div class="info" style="float:left;">' + file.name + '</div>' +
+                    '</div>'
+                ),
+                $img = $li.find('img');
+            // $list为容器jQuery实例
+            $list.append($li);
+            // 创建缩略图
+            // 如果为非图片文件，可以不用调用此方法。
+            // thumbnailWidth x thumbnailHeight 为 150 x 150
+            uploader.makeThumb(file, function (error, src) {
+                if (error) {
+                    $img.replaceWith('<span>不能预览</span>');
+                    return;
+                }
+                $img.attr('src', src);
+                $img.css({ "float": "left" });
+            }, 150, 150);
+        });
+        //上传成功后回调
+        uploader.on("uploadSuccess", function (file, json) {
+            if (json.success) {
+                $("#ShopImg").val(json.fileUrl);
+                $("#ShopImgName").val(json.oldFileName);
+                SaveFrom($("#addform").serialize());
+                return false;
+            }
+        });
+        $(function () {
+            var imgVal = "@(stockEntity != null ? stockEntity.ShopImg : "")";
+            var imgName = "@(stockEntity != null ? stockEntity.ShopImgName : "")";
+            var stockId = "@(stockEntity != null ? stockEntity.Id.ToString() : "")";
+            if (imgVal != "" && stockId != "") {
+                //隐藏上传按钮
+                $btnUpMenu.hide();
+                //绑定上传预览效果
+                var $li = $(
+                        '<div class="file-item thumbnail">' +
+                        '<img src="' + imgVal + '">' +
+                        '<div style="clear:both;"></div>' +
+                        '<div class="info" style="float:left;">' + imgName + '</div>' +
+                        '</div>'
+                    ),
+                    $img = $li.find('img');
+                // $list为容器jQuery实例
+                $list.append($li);
+            }
+            //表单校验
+            $('#addform').bootstrapValidator({
+                message: 'This value is not valid',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    //商品名称
+                    ShopName: {
+                        message: '商品名称不能为空',
+                        validators: {
+                            notEmpty: {
+                                message: '商品名称不能为空'
+                            } //,
+                            //stringLength: {
+                            //    min: 6,
+                            //    max: 30,
+                            //    message: 'The username must be more than 6 and less than 30 characters long'
+                            //},
+                            /*remote: {
+                       url: 'remote.php',
+                       message: 'The username is not available'
+                   },*/
+                            //regexp: {
+                            //    regexp: /^[a-zA-Z0-9_\.]+$/,
+                            //    message: 'The username can only consist of alphabetical, number, dot and underscore'
+                            //}
+                        }
+                    },
+                    //商品数量
+                    ShopNum: {
+                        message: '商品数量必须为正整数',
+                        validators: {
+                            regexp: {
+                                regexp: /^[0-9]+$/,
+                                message: '商品数量必须为正整数'
+                            }
+                        }
+                    },
+                    //商品进价
+                    ShopPurchasePrice: {
+                        message: '请输入正确的商品进价',
+                        validators: {
+                            regexp: {
+                                regexp: /(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/,
+                                message: '请输入正确的商品进价'
+                            }
+                        }
+                    },
+                    //商品售价
+                    ShopPrice: {
+                        message: '请输入正确的商品进价',
+                        validators: {
+                            regexp: {
+                                regexp: /(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/,
+                                message: '请输入正确的商品进价'
+                            }
+                        }
+                    },
+                    //库存参数_商品数量
+                    StockInfoItemList_Number: {
+                        message: '商品数量必须为正整数',
+                        validators: {
+                            regexp: {
+                                regexp: /^[0-9]+$/,
+                                message: '商品数量必须为正整数'
+                            }
+                        }
+                    }
+                }
+            });
+            //提交按钮触发
+            $("#btnSaveFrom").click(function () {
+                //表单校验
+                var formVaildator = $('#addform').bootstrapValidator('validate').data('bootstrapValidator');
+                //校验表单是否通过验证
+                var isVaildator = formVaildator.$invalidFields.length > 0 ? false : true;
+                if (isVaildator) {
+                    //如果stockid存在时修改库存信息
+                    if (stockId != "@Guid.Empty") {
+                        SaveFrom($("#addform").serialize());
+                        return false;
+                    }
+                    if ($btnUpMenu.is(":hidden")) {
+                        //上传图片
+                        uploader.upload();
+                    } else {
+                        layer.alert("商品图片不能为空", {
+                            icon: 0,
+                            skin: 'layer-ext-moon'
+                        });
+                    }
+                }
+            });
+            //添加参数信息
+            $("#appendStockItem").click(function () {
+                //得到追加的下标
+                var indexs = $(this).attr("dataIndex");
+                indexs = parseInt(indexs) + 1;
+                //更新参数
+                $(this).attr("dataIndex", indexs);
+                var stockLs = [];
+                //参数_商品编号
+                var stockitemforShopNumber = {};
+                stockitemforShopNumber.for = "StockInfoItemList_ShopNumber";
+                stockitemforShopNumber.id = "StockInfoItemList_ShopNumber";
+                stockitemforShopNumber.titleName = "商品编号";
+                stockitemforShopNumber.name = "StockInfoItemList[" + indexs + "].ShopNumber";
+                stockLs.push(stockitemforShopNumber);
+                //参数_尺码
+                var stockitemforSize = {};
+                stockitemforSize.for = "StockInfoItemList_Size";
+                stockitemforSize.id = "StockInfoItemList_Size";
+                stockitemforSize.titleName = "尺码";
+                stockitemforSize.name = "StockInfoItemList[" + indexs + "].Size";
+                stockLs.push(stockitemforSize);
+                //参数_颜色
+                var stockitemforColor = {};
+                stockitemforColor.for = "StockInfoItemList_Color";
+                stockitemforColor.id = "StockInfoItemList_Color";
+                stockitemforColor.titleName = "颜色";
+                stockitemforColor.name = "StockInfoItemList[" + indexs + "].Color";
+                stockLs.push(stockitemforColor);
+                //参数_数量
+                var stockitemforNumber = {};
+                stockitemforNumber.for = "StockInfoItemList_Number";
+                stockitemforNumber.id = "StockInfoItemList_Number";
+                stockitemforNumber.titleName = "数量";
+                stockitemforNumber.name = "StockInfoItemList[" + indexs + "].Number";
+                stockLs.push(stockitemforNumber);
+                //分割线
+                var solidObj = $('<div class="ln_solid"></div>');
+                //要循环追加的内容
+                $.each(stockLs, function (i, item) {
+                    var groupObj = $('<div class="form-group"></div>');
+                    var labelObj = $('<label class="control-label col-md-3 col-sm-3 col-xs-12" for="' + item.for + '"></label>');
+                    var titleObj = $('<span class="required">*</span>');
+                    var inputDivObj = $('<div class="col-md-6 col-sm-6 col-xs-12"></div>');
+                    var inputObj = $('<input type="text" id="' + item.id + '" name="' + item.name + '" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5" value="">');
+                    labelObj.text(item.titleName);
+                    labelObj.append(titleObj);
+                    inputDivObj.append(inputObj);
+                    groupObj.append(labelObj, inputDivObj);
+                    if (i == 0) {
+                        $("#stockInfoItemLs").append(solidObj);
+                    }
+                    $("#stockInfoItemLs").append(groupObj);
+                });
+            });
+        });
+    </script>
+}

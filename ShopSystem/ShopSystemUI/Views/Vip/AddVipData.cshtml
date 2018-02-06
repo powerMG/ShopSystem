@@ -1,0 +1,222 @@
+﻿@using ShopSystemEntity
+@{
+    ViewBag.Title = "AddVipData";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    VipScore vipEntity = Model as VipScore;
+}
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>
+                    @ViewBag.ShowTitle <small>这里是备注信息</small>
+                </h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="#">Settings 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Settings 2</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            @if (vipEntity != null)
+            {
+                <form id="addform" method="POST" class="form-horizontal form-label-left">
+                    <div class="x_content">
+                        <br>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="CardNumber">
+                                卡号 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="CardNumber" name="CardNumber" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5" value="@(vipEntity.CardNumber != null && vipEntity.CardNumber.Value>0 ?vipEntity.CardNumber.ToString():ViewBag.VipCode)" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Score">
+                                积分 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="Score" name="Score" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="7" value="@vipEntity.Score">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="VipName">
+                                会员名称<span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="VipName" name="VipName" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="7" value="@vipEntity.VipName">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="VipPhone">
+                                联系方式 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="VipPhone" name="VipPhone" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="7" value="@vipEntity.VipPhone">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="VipSex">
+                                性别 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="VipSex" name="VipSex" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="7" value="@vipEntity.VipSex">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                备注
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea class="form-control" id="ViipRemark" name="ViipRemark" rows="3" placeholder="请填写备注信息">@vipEntity.VipRemark</textarea>
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <input type="hidden" id="Id" name="Id" value="@vipEntity.Id" />
+                    </div>
+                    <div class="x_content">
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <button type="reset" id="btnCancel" class="btn btn-primary">重置</button>
+                                <button type="button" id="btnSaveFrom" class="btn btn-success">提交</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            }
+        </div>
+    </div>
+</div>
+@section js{
+    <script>
+        $(function() {
+            //表单校验
+            $('#addform').bootstrapValidator({
+                message: 'This value is not valid',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    //积分
+                    Score: {
+                        message: '积分不能为空',
+                        validators: {
+                            notEmpty: {
+                                message: '积分不能为空'
+                            },
+                            regexp: {
+                                regexp: /^([1-9]{1}[0-9]*)$/,
+                                message: '积分必须为大于1积分的正整数'
+                            } //,
+                            //stringLength: {
+                            //    min: 6,
+                            //    max: 30,
+                            //    message: 'The username must be more than 6 and less than 30 characters long'
+                            //},
+                            /*remote: {
+                       url: 'remote.php',
+                       message: 'The username is not available'
+                   },*/
+                            //regexp: {
+                            //    regexp: /^[a-zA-Z0-9_\.]+$/,
+                            //    message: 'The username can only consist of alphabetical, number, dot and underscore'
+                            //}
+                        }
+                    },
+                    //会员名称
+                    VipName: {
+                        message: '会员名称不能为空',
+                        notEmpty: {
+                            message: '会员名称不能为空'
+                        }
+                    },
+                    //会员联系方式
+                    VipPhone: {
+                        message: '联系方式不能为空',
+                        validators: {
+                            notEmpty: {
+                                message: '联系方式不能为空'
+                            },
+                            regexp: {
+                                regexp: /^1[34578]\d{9}$/,
+                                message: '请输入正确的联系方式'
+                            }
+                        }
+                    },
+                    //会员性别
+                    VipSex: {
+                        message: '会员性别不能为空',
+                        validators: {
+                            regexp: {
+                                regexp: /(^[男女])$/,
+                                message: '请输入正确的会员性别'
+                            }
+                        }
+                    }
+                }
+            });
+            //提交表单信息
+            $("#btnSaveFrom").click(function() {
+                //表单校验
+                var formVaildator = $('#addform').bootstrapValidator('validate').data('bootstrapValidator');
+                //校验表单是否通过验证
+                var isVaildator = formVaildator.$invalidFields.length > 0 ? false : true;
+                if (isVaildator) {
+                    //var formdate = {};
+                    //formdate.id = $("#Id").val();
+                    //formdate.CardNumber = $("#CardNumber").val();
+                    //formdate.Score = $("#Score").val();
+                    //formdate.VipName = $("#VipName").val();
+                    //formdate.VipPhone = $("#VipPhone").val();
+                    //formdate.VipSex = $("#VipSex").val();
+                    //formdate.ViipRemark = $("#ViipRemark").val();
+                    SaveFrom($("#addform").serialize());
+                }
+            });
+        });
+
+        function SaveFrom(formdate) {
+            //提交表单数据
+            var options = {
+                url: '@Url.Action("SaveVipData", "Vip")',
+                type: 'post',
+                dataType: 'json',
+                data: formdate,
+                success: function(data) {
+                    if (data.success) {
+                        layer.alert(data.error.message, {
+                            icon: 1,
+                            skin: 'layer-ext-moon',
+                            btn: ['确定']
+                        }, function() {
+                            window.location.reload();
+                        });
+                    } else {
+                        layer.alert(data.error.message, {
+                            icon: 2,
+                            skin: 'layer-ext-moon'
+                        });
+                    }
+                }
+            };
+            $.ajax(options);
+        }
+    </script>
+}

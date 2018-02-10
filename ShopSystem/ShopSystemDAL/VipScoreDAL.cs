@@ -8,7 +8,7 @@ using ShopSystemEntity;
 namespace ShopSystemDAL
 {
     /// <summary>
-    /// 数据访问类:VipScoreBuyLogDAL
+    /// 数据访问类:VipScoreDAL
     /// </summary>
     public class VipScoreDAL
     {
@@ -46,13 +46,13 @@ namespace ShopSystemDAL
             strSql.Append("@Id,@CardNumber,@Score,@VipName,@VipPhone,@VipSex,@VipRemark,@Status,@VipLevelId,@CreateBy,@CreateDate,@UpdateBy,@UpdateDate)");
             SqlParameter[] parameters = {
 					new SqlParameter("@Id", SqlDbType.UniqueIdentifier,16),
-					new SqlParameter("@CardNumber", SqlDbType.Int,4),
+					new SqlParameter("@CardNumber", SqlDbType.NVarChar,-1),
 					new SqlParameter("@Score", SqlDbType.Int,4),
-					new SqlParameter("@VipName", SqlDbType.VarChar,200),
-					new SqlParameter("@VipPhone", SqlDbType.Int,4),
-					new SqlParameter("@VipSex", SqlDbType.VarChar,3),
-					new SqlParameter("@VipRemark", SqlDbType.VarChar,2000),
-					new SqlParameter("@Status", SqlDbType.VarChar,20),
+					new SqlParameter("@VipName", SqlDbType.NVarChar,-1),
+					new SqlParameter("@VipPhone", SqlDbType.NVarChar,-1),
+					new SqlParameter("@VipSex", SqlDbType.NVarChar,-1),
+					new SqlParameter("@VipRemark", SqlDbType.NVarChar,-1),
+					new SqlParameter("@Status", SqlDbType.NVarChar,-1),
 					new SqlParameter("@VipLevelId", SqlDbType.UniqueIdentifier,16),
 					new SqlParameter("@CreateBy", SqlDbType.UniqueIdentifier,16),
 					new SqlParameter("@CreateDate", SqlDbType.DateTime),
@@ -66,10 +66,10 @@ namespace ShopSystemDAL
             parameters[5].Value = model.VipSex;
             parameters[6].Value = model.VipRemark;
             parameters[7].Value = model.Status;
-            parameters[8].Value = model.VipLevelId;
-            parameters[9].Value = model.CreateBy;
+            parameters[8].Value = Guid.NewGuid();
+            parameters[9].Value = Guid.NewGuid();
             parameters[10].Value = model.CreateDate;
-            parameters[11].Value =model.UpdateBy;
+            parameters[11].Value = Guid.NewGuid();
             parameters[12].Value = model.UpdateDate;
 
             int rows = _db.ExecuteSql(strSql.ToString(), parameters);
@@ -103,13 +103,13 @@ namespace ShopSystemDAL
             strSql.Append("UpdateDate=@UpdateDate");
             strSql.Append(" where Id=@Id ");
             SqlParameter[] parameters = {
-					new SqlParameter("@CardNumber", SqlDbType.Int,4),
+					new SqlParameter("@CardNumber", SqlDbType.NVarChar,-1),
 					new SqlParameter("@Score", SqlDbType.Int,4),
-					new SqlParameter("@VipName", SqlDbType.VarChar,200),
-					new SqlParameter("@VipPhone", SqlDbType.Int,4),
-					new SqlParameter("@VipSex", SqlDbType.VarChar,3),
-					new SqlParameter("@VipRemark", SqlDbType.VarChar,2000),
-					new SqlParameter("@Status", SqlDbType.VarChar,20),
+					new SqlParameter("@VipName", SqlDbType.NVarChar,-1),
+					new SqlParameter("@VipPhone", SqlDbType.NVarChar,-1),
+					new SqlParameter("@VipSex", SqlDbType.NVarChar,-1),
+					new SqlParameter("@VipRemark", SqlDbType.NVarChar,-1),
+					new SqlParameter("@Status", SqlDbType.NVarChar,-1),
 					new SqlParameter("@VipLevelId", SqlDbType.UniqueIdentifier,16),
 					new SqlParameter("@CreateBy", SqlDbType.UniqueIdentifier,16),
 					new SqlParameter("@CreateDate", SqlDbType.DateTime),
@@ -222,9 +222,9 @@ namespace ShopSystemDAL
                 {
                     model.Id = new Guid(row["Id"].ToString());
                 }
-                if (row["CardNumber"] != null && row["CardNumber"].ToString() != "")
+                if (row["CardNumber"] != null)
                 {
-                    model.CardNumber = int.Parse(row["CardNumber"].ToString());
+                    model.CardNumber = row["CardNumber"].ToString();
                 }
                 if (row["Score"] != null && row["Score"].ToString() != "")
                 {
@@ -234,9 +234,9 @@ namespace ShopSystemDAL
                 {
                     model.VipName = row["VipName"].ToString();
                 }
-                if (row["VipPhone"] != null && row["VipPhone"].ToString() != "")
+                if (row["VipPhone"] != null)
                 {
-                    model.VipPhone = int.Parse(row["VipPhone"].ToString());
+                    model.VipPhone = row["VipPhone"].ToString();
                 }
                 if (row["VipSex"] != null)
                 {
@@ -356,32 +356,6 @@ namespace ShopSystemDAL
             strSql.AppendFormat(" WHERE TT.Row between {0} and {1}", startIndex, endIndex);
             return _db.Query(strSql.ToString());
         }
-
-        /*
-        /// <summary>
-        /// 分页获取数据列表
-        /// </summary>
-        public DataSet GetList(int PageSize,int PageIndex,string strWhere)
-        {
-            SqlParameter[] parameters = {
-                    new SqlParameter("@tblName", SqlDbType.VarChar, 255),
-                    new SqlParameter("@fldName", SqlDbType.VarChar, 255),
-                    new SqlParameter("@PageSize", SqlDbType.Int),
-                    new SqlParameter("@PageIndex", SqlDbType.Int),
-                    new SqlParameter("@IsReCount", SqlDbType.Bit),
-                    new SqlParameter("@OrderType", SqlDbType.Bit),
-                    new SqlParameter("@strWhere", SqlDbType.VarChar,1000),
-                    };
-            parameters[0].Value = "Shop_VipScore";
-            parameters[1].Value = "Id";
-            parameters[2].Value = PageSize;
-            parameters[3].Value = PageIndex;
-            parameters[4].Value = 0;
-            parameters[5].Value = 0;
-            parameters[6].Value = strWhere;	
-            return _db.RunProcedure("UP_GetRecordByPage",parameters,"ds");
-        }*/
-
         #endregion  BasicMethod
 		#region  ExtensionMethod
         public List<VipScore> GetVipscoreListByPage(string strWhere, string orderby, int startIndex, int endIndex)

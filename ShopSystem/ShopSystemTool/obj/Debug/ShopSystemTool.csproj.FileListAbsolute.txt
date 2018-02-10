@@ -3,3 +3,8 @@ G:\WebsetDemo\ShopManagerSystem\ShopSystem\ShopSystemTool\bin\Debug\ShopSystemTo
 G:\WebsetDemo\ShopManagerSystem\ShopSystem\ShopSystemTool\obj\Debug\ShopSystemTool.csprojResolveAssemblyReference.cache
 G:\WebsetDemo\ShopManagerSystem\ShopSystem\ShopSystemTool\obj\Debug\ShopSystemTool.dll
 G:\WebsetDemo\ShopManagerSystem\ShopSystem\ShopSystemTool\obj\Debug\ShopSystemTool.pdb
+G:\WebsetDemo\VipSystemProject\ShopSystem\ShopSystem\ShopSystemTool\bin\Debug\ShopSystemTool.dll
+G:\WebsetDemo\VipSystemProject\ShopSystem\ShopSystem\ShopSystemTool\bin\Debug\ShopSystemTool.pdb
+G:\WebsetDemo\VipSystemProject\ShopSystem\ShopSystem\ShopSystemTool\obj\Debug\ShopSystemTool.csprojResolveAssemblyReference.cache
+G:\WebsetDemo\VipSystemProject\ShopSystem\ShopSystem\ShopSystemTool\obj\Debug\ShopSystemTool.dll
+G:\WebsetDemo\VipSystemProject\ShopSystem\ShopSystem\ShopSystemTool\obj\Debug\ShopSystemTool.pdb

@@ -99,7 +99,7 @@
                 var objcheck = $(".bulk_action input[name='table_records']:checked");
                 if (objcheck.length == 1) {
                     var stockId = $(objcheck).attr("data");
-                    window.location.href = "@Url.Action("AddStock", "Stock")?stockId=" + stockId;
+                    window.location.href = "@Url.Action("AddVipData", "Vip")?Id=" + stockId;
                 } else if (objcheck.length > 1) {
                     {
                         layer.alert("最多只能选择一条信息进行编辑", {

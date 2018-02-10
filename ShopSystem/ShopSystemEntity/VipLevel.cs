@@ -1,105 +1,97 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ShopSystemEntity
 {
+    [Table("Shop_VipLevel")]
     public class VipLevel
     {
-        public VipLevel()
-        { }
-        #region Model
-        private Guid _id;
-        private int? _levelnumber;
-        private int? _score;
-        private string _levelremark;
-        private decimal? _discount;
-        private string _status;
-        private Guid _createby;
-        private DateTime? _createdate;
-        private Guid _updateby;
-        private DateTime? _updatedate;
+        #region Model        
         /// <summary>
         /// 
         /// </summary>
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id
         {
-            set { _id = value; }
-            get { return _id; }
+            set;
+            get;
         }
         /// <summary>
         /// 
         /// </summary>
         public int? LevelNumber
         {
-            set { _levelnumber = value; }
-            get { return _levelnumber; }
+            set;
+            get;
         }
         /// <summary>
         /// 
         /// </summary>
         public int? Score
         {
-            set { _score = value; }
-            get { return _score; }
+            set;
+            get;
         }
         /// <summary>
         /// 
         /// </summary>
         public string LevelRemark
         {
-            set { _levelremark = value; }
-            get { return _levelremark; }
+            set;
+            get;
         }
         /// <summary>
         /// 
         /// </summary>
         public decimal? Discount
         {
-            set { _discount = value; }
-            get { return _discount; }
+            set;
+            get;
         }
         /// <summary>
         /// 
         /// </summary>
         public string Status
         {
-            set { _status = value; }
-            get { return _status; }
+            set;
+            get;
         }
         /// <summary>
         /// 
         /// </summary>
         public Guid CreateBy
         {
-            set { _createby = value; }
-            get { return _createby; }
+            set;
+            get;
         }
         /// <summary>
         /// 
         /// </summary>
         public DateTime? CreateDate
         {
-            set { _createdate = value; }
-            get { return _createdate; }
+            set;
+            get;
         }
         /// <summary>
         /// 
         /// </summary>
         public Guid UpdateBy
         {
-            set { _updateby = value; }
-            get { return _updateby; }
+            set;
+            get;
         }
         /// <summary>
         /// 
         /// </summary>
         public DateTime? UpdateDate
         {
-            set { _updatedate = value; }
-            get { return _updatedate; }
+            set;
+            get;
         }
         #endregion Model
     }

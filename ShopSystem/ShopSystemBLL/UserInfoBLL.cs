@@ -10,6 +10,7 @@ namespace ShopSystemBLL
 {
     public class UserInfoBLL
     {
+        EntityDBContext _db = new EntityDBContext();
         private UserInfoBLL()
         {
         }
@@ -37,6 +38,15 @@ namespace ShopSystemBLL
         public List<UserInfo> GetArrayList(int Top, string strWhere, string filedOrder)
         {
             return UserInfoDAL.instance.GetArrayList(Top, strWhere, filedOrder);
+        }
+        /// <summary>
+        /// 根据用户名密码得到用户信息
+        /// </summary>
+        /// <param name="model">参数</param>
+        /// <returns></returns>
+        public UserInfo GetUserInfoData(UserInfo model)
+        {
+            return _db.UserInfo.Where(m => m.UserName == model.UserName && m.Password == model.Password).FirstOrDefault();
         }
     }
 }

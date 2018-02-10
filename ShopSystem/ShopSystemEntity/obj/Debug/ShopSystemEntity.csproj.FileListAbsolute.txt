@@ -3,3 +3,13 @@ G:\WebsetDemo\ShopManagerSystem\ShopSystem\ShopSystemEntity\bin\Debug\ShopSystem
 G:\WebsetDemo\ShopManagerSystem\ShopSystem\ShopSystemEntity\obj\Debug\ShopSystemEntity.csprojResolveAssemblyReference.cache
 G:\WebsetDemo\ShopManagerSystem\ShopSystem\ShopSystemEntity\obj\Debug\ShopSystemEntity.dll
 G:\WebsetDemo\ShopManagerSystem\ShopSystem\ShopSystemEntity\obj\Debug\ShopSystemEntity.pdb
+G:\WebsetDemo\VipSystemProject\ShopSystem\ShopSystem\ShopSystemEntity\bin\Debug\ShopSystemEntity.dll
+G:\WebsetDemo\VipSystemProject\ShopSystem\ShopSystem\ShopSystemEntity\bin\Debug\ShopSystemEntity.pdb
+G:\WebsetDemo\VipSystemProject\ShopSystem\ShopSystem\ShopSystemEntity\obj\Debug\ShopSystemEntity.csprojResolveAssemblyReference.cache
+G:\WebsetDemo\VipSystemProject\ShopSystem\ShopSystem\ShopSystemEntity\obj\Debug\ShopSystemEntity.dll
+G:\WebsetDemo\VipSystemProject\ShopSystem\ShopSystem\ShopSystemEntity\obj\Debug\ShopSystemEntity.pdb
+G:\WebsetDemo\VipSystemProject\ShopSystem\ShopSystem\ShopSystemEntity\bin\Debug\ShopSystemEntity.dll.config
+G:\WebsetDemo\VipSystemProject\ShopSystem\ShopSystem\ShopSystemEntity\bin\Debug\EntityFramework.dll
+G:\WebsetDemo\VipSystemProject\ShopSystem\ShopSystem\ShopSystemEntity\bin\Debug\EntityFramework.SqlServer.dll
+G:\WebsetDemo\VipSystemProject\ShopSystem\ShopSystem\ShopSystemEntity\bin\Debug\EntityFramework.xml
+G:\WebsetDemo\VipSystemProject\ShopSystem\ShopSystem\ShopSystemEntity\bin\Debug\EntityFramework.SqlServer.xml

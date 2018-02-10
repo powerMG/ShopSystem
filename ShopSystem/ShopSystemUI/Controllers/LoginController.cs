@@ -20,12 +20,14 @@ namespace ShopSystemUI
 
         public JsonResult GetUserInfo(UserInfo model)
         {
-            StringBuilder strWhere = new StringBuilder();
-            if (!string.IsNullOrEmpty(model.UserName) && !string.IsNullOrEmpty(model.Password))
-            {
-                strWhere.Append(string.Format("UserName='{0}' and Password='{1}'", model.UserName, model.Password));
-            }
-            var userModel = UserInfoBLL.Instance.GetModel(strWhere.ToString());
+            //StringBuilder strWhere = new StringBuilder();
+            //if (!string.IsNullOrEmpty(model.UserName) && !string.IsNullOrEmpty(model.Password))
+            //{
+            //    strWhere.Append(string.Format("UserName='{0}' and Password='{1}'", model.UserName, model.Password));
+            //}
+            //var userModel = UserInfoBLL.Instance.GetModel(strWhere.ToString());
+
+            var userModel = UserInfoBLL.Instance.GetUserInfoData(model);
             var success = false;
             var errorText = "用户名，密码输入有误。";
             if (userModel != null)

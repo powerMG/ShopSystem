@@ -1,124 +1,66 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ShopSystemEntity
 {
+    [Table("Shop_UserInfo")]
     public class UserInfo
     {
-        public UserInfo()
-        { }
-        #region Model
-        private Guid _id;
-        private string _username;
-        private string _password;
-        private string _address;
-        private string _sex;
-        private string _telnum;
-        private string _phonenum;
-        private string _status;
-        private DateTime? _createdate;
-        private Guid _createby;
-        private DateTime? _updatedate;
-        private Guid _updateby;
+        #region Model        
         /// <summary>
         /// 
         /// </summary>
-        public Guid Id
-        {
-            set { _id = value; }
-            get { return _id; }
-        }
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid Id { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public string UserName
-        {
-            set { _username = value; }
-            get { return _username; }
-        }
+        public string UserName { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public string Password
-        {
-            set { _password = value; }
-            get { return _password; }
-        }
+        public string Password { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public string Address
-        {
-            set { _address = value; }
-            get { return _address; }
-        }
+        public string Address { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public string Sex
-        {
-            set { _sex = value; }
-            get { return _sex; }
-        }
+        public string Sex { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public string TelNum
-        {
-            set { _telnum = value; }
-            get { return _telnum; }
-        }
+        public string TelNum { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public string PhoneNum
-        {
-            set { _phonenum = value; }
-            get { return _phonenum; }
-        }
+        public string PhoneNum { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public string Status
-        {
-            set { _status = value; }
-            get { return _status; }
-        }
+        public string Status { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public DateTime? CreateDate
-        {
-            set { _createdate = value; }
-            get { return _createdate; }
-        }
+        public DateTime? CreateDate { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public Guid CreateBy
-        {
-            set { _createby = value; }
-            get { return _createby; }
-        }
+        public Guid CreateBy { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public DateTime? UpdateDate
-        {
-            set { _updatedate = value; }
-            get { return _updatedate; }
-        }
+        public DateTime? UpdateDate { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public Guid UpdateBy
-        {
-            set { _updateby = value; }
-            get { return _updateby; }
-        }
+        public Guid UpdateBy { get; set; }
         #endregion Model
 
     }

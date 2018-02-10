@@ -50,6 +50,23 @@ namespace ShopSystemUI.Controllers
             {
                 if (model.Id != Guid.Empty)
                 {
+                    //得到vip信息
+                    var vipmodle = VipScoreBLL.Instance.GetModel(model.Id);
+                    if (vipmodle != null)
+                    {
+                        vipmodle.Score = model.Score;
+                        vipmodle.VipName = model.VipName;
+                        vipmodle.VipPhone = model.VipPhone;
+                        vipmodle.VipSex = model.VipSex;
+                        vipmodle.VipRemark = model.VipRemark;
+                        vipmodle.UpdateBy = GetUserInfoEntity().Id;
+                        vipmodle.UpdateDate = DateTime.Now;
+                        if (VipScoreBLL.Instance.Update(vipmodle))
+                        {
+                            return Json(new { success = true, error = new { code = 202, message = "保存成功" } });
+                        }
+                        return Json(new { success = false, error = new { code = 301, message = "保存失败" } });
+                    }
                 }
                 else
                 {

@@ -276,7 +276,7 @@ class DataSource:
     self.create_grammar()
 
   def create_grammar(self):
-    root_table = SymbolTable("root",
+    root_table = SymbolTable("Shop_root",
                              map( lambda f: Bind(f['name'], GeometryProperty(f['name'])), self.fields )
                              )
 

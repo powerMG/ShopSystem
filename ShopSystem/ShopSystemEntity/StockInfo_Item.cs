@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,100 +12,90 @@ namespace ShopSystemEntity
     /// StockInfo_Item:实体类(属性说明自动提取数据库字段的描述信息)
     /// </summary>
     [Serializable]
+    [Table("Shop_StockInfo_Item")]
     public class StockInfo_Item
     {
-        public StockInfo_Item()
-        { }
-        #region Model
-        private Guid _id;
-        private Guid _stockinfoid;
-        private string _shopnumber;
-        private string _size;
-        private string _color;
-        private int? _number;
-        private Guid _createby;
-        private DateTime? _createdate;
-        private Guid _updateby;
-        private DateTime? _updatedate;
+        #region Model       
         /// <summary>
         /// 
         /// </summary>
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id
         {
-            set { _id = value; }
-            get { return _id; }
+            set;
+            get;
         }
         /// <summary>
         /// 
         /// </summary>
         public Guid StockInfoId
         {
-            set { _stockinfoid = value; }
-            get { return _stockinfoid; }
+            set;
+            get;
         }
         /// <summary>
         /// 
         /// </summary>
         public string ShopNumber
         {
-            set { _shopnumber = value; }
-            get { return _shopnumber; }
+            set;
+            get;
         }
         /// <summary>
         /// 
         /// </summary>
         public string Size
         {
-            set { _size = value; }
-            get { return _size; }
+            set;
+            get;
         }
         /// <summary>
         /// 
         /// </summary>
         public string Color
         {
-            set { _color = value; }
-            get { return _color; }
+            set;
+            get;
         }
         /// <summary>
         /// 
         /// </summary>
         public int? Number
         {
-            set { _number = value; }
-            get { return _number; }
+            set;
+            get;
         }
         /// <summary>
         /// 
         /// </summary>
         public Guid CreateBy
         {
-            set { _createby = value; }
-            get { return _createby; }
+            set;
+            get;
         }
         /// <summary>
         /// 
         /// </summary>
         public DateTime? CreateDate
         {
-            set { _createdate = value; }
-            get { return _createdate; }
+            set;
+            get;
         }
         /// <summary>
         /// 
         /// </summary>
         public Guid UpdateBy
         {
-            set { _updateby = value; }
-            get { return _updateby; }
+            set;
+            get;
         }
         /// <summary>
         /// 
         /// </summary>
         public DateTime? UpdateDate
         {
-            set { _updatedate = value; }
-            get { return _updatedate; }
+            set;
+            get;
         }
         #endregion Model
 

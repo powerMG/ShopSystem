@@ -43,7 +43,7 @@
                                 卡号 <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" id="CardNumber" name="CardNumber" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5" value="@(vipEntity.CardNumber != null && vipEntity.CardNumber.Value>0 ?vipEntity.CardNumber.ToString():ViewBag.VipCode)" readonly="readonly">
+                                <input type="text" id="CardNumber" name="CardNumber" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5" value="@(!string.IsNullOrEmpty(vipEntity.CardNumber) ?vipEntity.CardNumber:ViewBag.VipCode)" readonly="readonly">
                             </div>
                         </div>
                         <div class="form-group">
@@ -83,7 +83,7 @@
                                 备注
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <textarea class="form-control" id="ViipRemark" name="ViipRemark" rows="3" placeholder="请填写备注信息">@vipEntity.VipRemark</textarea>
+                                <textarea class="form-control" id="VipRemark" name="VipRemark" rows="3" placeholder="请填写备注信息">@vipEntity.VipRemark</textarea>
                             </div>
                         </div>
                         <div class="ln_solid"></div>

@@ -1,145 +1,133 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace ShopSystemEntity
 {
     /// <summary>
     /// StockInfo:实体类(属性说明自动提取数据库字段的描述信息)
     /// </summary>
     [Serializable]
+    [Table("Shop_StockInfo")]
     public partial class StockInfo
     {
-        public StockInfo()
-        { }
         #region Model
-        private Guid _id;
-        private string _shopimg;
-        private string _shopimgname;
-        private string _shopname;
-        private int? _shopnum;
-        private string _shopsource;
-        private decimal? _shoppurchaseprice;
-        private decimal? _shopprice;
-        private string _shopremark;
-        private string _status;
-        private Guid _createby;
-        private DateTime? _createdate;
-        private Guid _updateby;
-        private DateTime? _updatedate;
         /// <summary>
         /// 
         /// </summary>
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id
         {
-            set { _id = value; }
-            get { return _id; }
+            set;
+            get;
         }
         /// <summary>
         /// 
         /// </summary>
         public string ShopImg
         {
-            set { _shopimg = value; }
-            get { return _shopimg; }
+            set;
+            get;
         }
         /// <summary>
         /// 
         /// </summary>
         public string ShopImgName
         {
-            set { _shopimgname = value; }
-            get { return _shopimgname; }
+            set;
+            get;
         }
         /// <summary>
         /// 
         /// </summary>
         public string ShopName
         {
-            set { _shopname = value; }
-            get { return _shopname; }
+            set;
+            get;
         }
         /// <summary>
         /// 
         /// </summary>
         public int? ShopNum
         {
-            set { _shopnum = value; }
-            get { return _shopnum; }
+            set;
+            get;
         }
         /// <summary>
         /// 
         /// </summary>
         public string ShopSource
         {
-            set { _shopsource = value; }
-            get { return _shopsource; }
+            set;
+            get;
         }
         /// <summary>
         /// 
         /// </summary>
         public decimal? ShopPurchasePrice
         {
-            set { _shoppurchaseprice = value; }
-            get { return _shoppurchaseprice; }
+            set;
+            get;
         }
         /// <summary>
         /// 
         /// </summary>
         public decimal? ShopPrice
         {
-            set { _shopprice = value; }
-            get { return _shopprice; }
+            set;
+            get;
         }
         /// <summary>
         /// 
         /// </summary>
         public string ShopRemark
         {
-            set { _shopremark = value; }
-            get { return _shopremark; }
+            set;
+            get;
         }
         /// <summary>
         /// 
         /// </summary>
         public string Status
         {
-            set { _status = value; }
-            get { return _status; }
+            set;
+            get;
         }
         /// <summary>
         /// 
         /// </summary>
         public Guid CreateBy
         {
-            set { _createby = value; }
-            get { return _createby; }
+            set;
+            get;
         }
         /// <summary>
         /// 
         /// </summary>
         public DateTime? CreateDate
         {
-            set { _createdate = value; }
-            get { return _createdate; }
+            set;
+            get;
         }
         /// <summary>
         /// 
         /// </summary>
         public Guid UpdateBy
         {
-            set { _updateby = value; }
-            get { return _updateby; }
+            set;
+            get;
         }
         /// <summary>
         /// 
         /// </summary>
         public DateTime? UpdateDate
         {
-            set { _updatedate = value; }
-            get { return _updatedate; }
+            set;
+            get;
         }
         #endregion Model
         #region 辅助扩展字段
+        [NotMapped]
         public IList<StockInfo_Item> StockInfoItemList { get; set; }
         #endregion
     }

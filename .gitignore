@@ -1,0 +1,6 @@
+/ShopSystem/packages
+/ShopSystem/ShopSystemBLL/*
+/ShopSystem/ShopSystemDAL/*
+/ShopSystem/ShopSystemEntity/*
+/ShopSystem/ShopSystemTool/*
+/ShopSystem/ShopSystemUI/*
